@@ -50,7 +50,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
 }): HeadConfig => {
   return {
-    title: `GNC | ${document.name}`,
+    title: `Dollar tree | Products`,
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
   };

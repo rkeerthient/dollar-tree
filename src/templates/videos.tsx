@@ -25,7 +25,7 @@ export const getHeadConfig: GetHeadConfig<
   TemplateRenderProps
 > = (): HeadConfig => {
   return {
-    title: "Centrum | FAQs",
+    title: "Dollar tree | Videos",
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
   };
