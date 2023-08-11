@@ -19,6 +19,7 @@ import { useMyContext } from "../context/context";
 import { config } from "../templates/category_results";
 import Product from "../types/products";
 import searchConfig from "./searchConfig";
+import SpeechToText from "./SpeechToText";
 type Link = {
   label: string;
   url: string;
@@ -148,6 +149,13 @@ const Header = ({ _site }: any) => {
       : path.includes("products") &&
         (window.location.href = `/index?${queryParams.toString()}`);
   };
+  const handleDataFromChild = (data: any, listenStatus: any) => {
+    data && searchActions.setQuery(data);
+    !listenStatus && !state
+      ? (searchActions.setUniversal(), searchActions.executeUniversalQuery())
+      : (searchActions.setVertical(state!),
+        searchActions.executeVerticalQuery());
+  };
   return (
     <>
       <div className="centered-container">
@@ -155,24 +163,32 @@ const Header = ({ _site }: any) => {
           <div className="flex flex-row  items-center gap-8 justify-between">
             <Image image={logo} layout="fixed" height={150}></Image>
             <div className="ml-10 space-x-4 flex-1">
-              <SearchBar
-                hideRecentSearches={true}
-                customCssClasses={{ searchBarContainer: "!mb-0" }}
-                {...(state &&
-                  state !== "products" && { includedVerticals: [] })}
-                {...(state === "products" && {
-                  visualAutocompleteConfig: {
-                    entityPreviewSearcher: entityPreviewSearcher,
-                    includedVerticals: ["products"],
-                    renderEntityPreviews: renderEntityPreviews,
-                    universalLimit: { products: 4 },
-                    entityPreviewsDebouncingTime: 300,
-                  },
-                  onSearch: handleSearch,
-                })}
-              />
+              <div className="w-full flex bg-white gap-2 items-center pr-3 border">
+                <SearchBar
+                  hideRecentSearches={true}
+                  customCssClasses={{
+                    searchBarContainer: "!mb-0 flex-1 searchBar",
+                  }}
+                  {...(state &&
+                    state !== "products" && { includedVerticals: [] })}
+                  {...(state === "products" && {
+                    visualAutocompleteConfig: {
+                      entityPreviewSearcher: entityPreviewSearcher,
+                      includedVerticals: ["products"],
+                      renderEntityPreviews: renderEntityPreviews,
+                      universalLimit: { products: 4 },
+                      entityPreviewsDebouncingTime: 300,
+                    },
+                    onSearch: handleSearch,
+                  })}
+                />
+                <div className="w-fit text-black">
+                  <SpeechToText
+                    sendDataToParent={handleDataFromChild}
+                  ></SpeechToText>
+                </div>
+              </div>
             </div>
-
             <div className="flex gap-6 !text-green-500 items-center">
               <div className="text-white bg-red-600 font-bold p-2">
                 Shop plus
