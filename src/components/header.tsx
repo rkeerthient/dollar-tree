@@ -16,8 +16,6 @@ import {
   VerticalResults as VerticalResultsData,
   UniversalLimit,
 } from "@yext/search-headless-react";
-import { useMyContext } from "../context/context";
-import { config } from "../templates/category_results";
 import Product from "../types/products";
 import searchConfig from "./searchConfig";
 import SpeechToText from "./SpeechToText";
@@ -58,7 +56,6 @@ const Header = ({ _site }: any) => {
   ));
   const state = useSearchState((state) => state.vertical.verticalKey);
   const searchActions = useSearchActions();
-  const { setPromoData } = useMyContext();
   const [path, setPath] = React.useState("");
   React.useEffect(() => {
     const currentPath = window.location.pathname;
