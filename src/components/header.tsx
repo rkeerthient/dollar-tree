@@ -14,6 +14,7 @@ import {
   useSearchActions,
   provideHeadless,
   VerticalResults as VerticalResultsData,
+  UniversalLimit,
 } from "@yext/search-headless-react";
 import { useMyContext } from "../context/context";
 import { config } from "../templates/category_results";
@@ -116,39 +117,33 @@ const Header = ({ _site }: any) => {
     ) : null;
   };
 
+  const universalLimit: UniversalLimit = {
+    faqs: 6,
+    products: 12,
+    locations: 5,
+  };
+
   const handleSearch: onSearchFunc = (searchEventData) => {
     const { query } = searchEventData;
     const path = window.location.pathname;
     const queryParams = new URLSearchParams(window.location.search);
-
+    const verticalKey = useSearchState((state) => state.vertical.verticalKey);
     if (query) {
       queryParams.set("query", query);
     } else {
       queryParams.delete("query");
     }
-    ["/index", undefined, "/"].includes(path)
-      ? (query && searchActions.setQuery(query),
-        searchActions.setUniversal(),
-        searchActions.executeUniversalQuery())
-      : path === "/product-grid"
+    query && searchActions.setQuery(query);
+    ["/index", undefined, "/", "products"].includes(path)
       ? (searchActions.setUniversal(),
-        query && searchActions.setQuery(query),
-        searchActions.setUniversal(),
-        searchActions
-          .executeUniversalQuery()
-          .then((res) =>
-            res?.verticalResults[0].verticalKey === "promotion"
-              ? setPromoData(res)
-              : setPromoData("")
-          )
-          .then(() => {
-            searchActions.setVertical("products");
-            query && searchActions.setQuery(query);
-            searchActions.executeVerticalQuery();
-          }))
-      : path.includes("products") &&
-        (window.location.href = `/index?${queryParams.toString()}`);
+        searchActions.setUniversalLimit(universalLimit),
+        searchActions.executeUniversalQuery())
+      : path.includes("products")
+      ? (window.location.href = `/index?${queryParams.toString()}`)
+      : (searchActions.setVertical(verticalKey!),
+        searchActions.executeUniversalQuery());
   };
+
   const handleDataFromChild = (data: any, listenStatus: any) => {
     data && searchActions.setQuery(data);
     !listenStatus && !state
