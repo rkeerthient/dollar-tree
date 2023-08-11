@@ -61,3 +61,23 @@ h2 {
 .searchBar {
   @apply !mb-0;
 }
+@responsive {
+  .univLocMap {
+    display: contents;
+    border: 1px solid;
+  }
+  .map-container {
+    display: block;
+    width: 1290px;
+    border: 1px solid;
+  }
+  .univLocMap .map-container {
+    width: 100%;
+    height: 300px;
+  }
+  .univLocMap #map {
+    top: 0;
+    bottom: 0;
+    width: 100% !important;
+  }
+}

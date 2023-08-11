@@ -80,37 +80,42 @@ const HomePage = () => {
     );
   };
   return (
-    <div className="centered-container">
-      {featuredSnippet && featuredSnippet.fieldType !== "rich_text" ? (
-        <DirectAnswer customCssClasses={{ answerContainer: "bg-white" }} />
-      ) : (
-        featuredSnippet && buildResponse(featuredSnippet)
+    <>
+      {" "}
+      {!loading && (
+        <div className="centered-container">
+          {featuredSnippet && featuredSnippet.fieldType !== "rich_text" ? (
+            <DirectAnswer customCssClasses={{ answerContainer: "bg-white" }} />
+          ) : (
+            featuredSnippet && buildResponse(featuredSnippet)
+          )}
+          <UniversalResults
+            showAppliedFilters={true}
+            customCssClasses={{
+              universalResultsContainer: "w-full mx-auto my-6 ",
+            }}
+            verticalConfigMap={{
+              faqs: {
+                CardComponent: FAQCard,
+                viewAllButton: true,
+                label: "FAQs",
+              },
+              products: {
+                CardComponent: ProductCard,
+                SectionComponent: GridSection,
+                label: "Products",
+                viewAllButton: true,
+              },
+              locations: {
+                CardComponent: UnivLocationCard,
+                SectionComponent: LocationSection,
+                viewAllButton: true,
+              },
+            }}
+          />
+        </div>
       )}
-      <UniversalResults
-        showAppliedFilters={true}
-        customCssClasses={{
-          universalResultsContainer: "w-full mx-auto my-6 ",
-        }}
-        verticalConfigMap={{
-          faqs: {
-            CardComponent: FAQCard,
-            viewAllButton: true,
-            label: "FAQs",
-          },
-          products: {
-            CardComponent: ProductCard,
-            SectionComponent: GridSection,
-            label: "Products",
-            viewAllButton: true,
-          },
-          locations: {
-            CardComponent: UnivLocationCard,
-            SectionComponent: LocationSection,
-            viewAllButton: true,
-          },
-        }}
-      />
-    </div>
+    </>
   );
 };
 

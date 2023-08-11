@@ -58,7 +58,7 @@ const UnivLocationCard: CardComponent<any> = ({ result }) => {
             </a>
             <a
               target="_blank"
-              href={result.rawData.slug}
+              href={result.rawData.landingPageUrl}
               className="text-sm text-center bg-gray-800 text-white py-4 px-8"
             >
               View Store Details

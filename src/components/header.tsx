@@ -114,12 +114,6 @@ const Header = ({ _site }: any) => {
     ) : null;
   };
 
-  const universalLimit: UniversalLimit = {
-    faqs: 6,
-    products: 12,
-    locations: 5,
-  };
-
   const handleSearch: onSearchFunc = (searchEventData) => {
     const { query } = searchEventData;
     const path = window.location.pathname;
@@ -133,7 +127,11 @@ const Header = ({ _site }: any) => {
     query && searchActions.setQuery(query);
     ["/index", undefined, "/", "products"].includes(path)
       ? (searchActions.setUniversal(),
-        searchActions.setUniversalLimit(universalLimit),
+        searchActions.setUniversalLimit({
+          faqs: 6,
+          products: 12,
+          locations: 5,
+        }),
         searchActions.executeUniversalQuery())
       : path.includes("products")
       ? (window.location.href = `/index?${queryParams.toString()}`)
