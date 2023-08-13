@@ -61,7 +61,7 @@ const Mapboxuniv = ({ data }: any) => {
         const popup = new mapboxgl.Popup({
           offset: 25,
         }).setHTML(createPopUp1(item));
-        new mapboxgl.Marker()
+        new mapboxgl.Marker({ color: "#6fab7d" })
           .setLngLat({
             lng: item.yextDisplayCoordinate.longitude,
             lat: item.yextDisplayCoordinate.latitude,
@@ -96,7 +96,7 @@ const Mapboxuniv = ({ data }: any) => {
         const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
           createPopUp(item)
         );
-        new mapboxgl.Marker()
+        new mapboxgl.Marker({ color: "#6fab7d" })
           .setLngLat({
             lng: item.rawData.yextDisplayCoordinate.longitude,
             lat: item.rawData.yextDisplayCoordinate.latitude,

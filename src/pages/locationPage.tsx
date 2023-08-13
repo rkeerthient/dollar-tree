@@ -21,6 +21,7 @@ import * as React from "react";
 import MapPin from "../components/MapPin";
 import "mapbox-gl/dist/mapbox-gl.css";
 import LocationCard from "../components/cards/LocationCard";
+import Loader from "../components/Loader";
 
 export interface Location {
   yextDisplayCoordinate?: Coordinate;
@@ -68,7 +69,9 @@ const LocationPage = () => {
 
   return (
     <>
-      {!isLoading && (
+      {!isLoading ? (
+        <Loader />
+      ) : (
         <div>
           <div className="flex flex-row">
             <div

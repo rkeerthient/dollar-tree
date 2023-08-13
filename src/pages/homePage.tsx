@@ -12,10 +12,14 @@ import FAQCard from "../components/cards/FAQCard";
 import Mapboxuniv from "../components/cards/Mapboxuniv";
 import { ProductCard } from "../components/cards/ProductCard";
 import UnivLocationCard from "../components/cards/univLocCard";
+import { BlogCard } from "../components/cards/BlogCard";
+import Loader from "../components/Loader";
 
 const HomePage = () => {
   const loading = useSearchState((state) => state.searchStatus.isLoading);
   const featuredSnippet = useSearchState((state) => state.directAnswer.result);
+  const res = useSearchState((state) => state.universal.verticals);
+  console.log(res);
 
   const LocationSection = ({ results, CardComponent, header }: any) => {
     return (
@@ -41,6 +45,21 @@ const HomePage = () => {
       <div>
         <div>{header}</div>
         <div className="grid grid-cols-2 gap-1 md:grid-cols-4 md:gap-8 ">
+          {results.map((r: any, index: number) => (
+            <CardComponent key={index} result={r} />
+          ))}
+        </div>
+      </div>
+    );
+  };
+  const GridSection3Col = ({ results, CardComponent, header }: any) => {
+    if (!CardComponent) {
+      return <div>Missing Card Component</div>;
+    }
+    return (
+      <div>
+        <div>{header}</div>
+        <div className="grid grid-cols-2 gap-1 md:grid-cols-3 md:gap-8 ">
           {results.map((r: any, index: number) => (
             <CardComponent key={index} result={r} />
           ))}
@@ -81,9 +100,18 @@ const HomePage = () => {
   };
   return (
     <>
-      {" "}
+      {loading && <Loader />}
+      {!loading && (!res || res.length <= 0) && (
+        <div className="centered-container space-y-16">
+          <img src="https://i.imgur.com/llPVQuH.png" alt="" />
+          <img src="https://i.imgur.com/A1ex5HW.png" alt="" />
+          <img src="https://i.imgur.com/xQMCmnn.png" alt="" />
+          <img src="https://i.imgur.com/VjMjAey.png" alt="" />
+        </div>
+      )}
       {!loading && (
         <div className="centered-container">
+          <ResultsCount></ResultsCount>
           {featuredSnippet && featuredSnippet.fieldType !== "rich_text" ? (
             <DirectAnswer customCssClasses={{ answerContainer: "bg-white" }} />
           ) : (
@@ -104,6 +132,12 @@ const HomePage = () => {
                 CardComponent: ProductCard,
                 SectionComponent: GridSection,
                 label: "Products",
+                viewAllButton: true,
+              },
+              blogs: {
+                CardComponent: BlogCard,
+                SectionComponent: GridSection3Col,
+                label: "Blogs",
                 viewAllButton: true,
               },
               locations: {

@@ -10,12 +10,12 @@ import {
 import * as React from "react";
 import { useEffect } from "react";
 import FAQCard from "../components/cards/FAQCard";
+import Loader from "../components/Loader";
 
 const FAQsPage = ({ sendDataToParent }: any) => {
   const searchActions = useSearchActions();
-  const faqResults = useSearchState((state) => state.vertical.results) || [];
-  const loadingState =
-    useSearchState((state) => state.searchStatus.isLoading) || true;
+  const isLoading =
+    useSearchState((state) => state.searchStatus.isLoading);
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -25,30 +25,31 @@ const FAQsPage = ({ sendDataToParent }: any) => {
     searchActions.executeVerticalQuery();
   }, []);
 
-
-
   return (
     <>
-      <div className="flex mt-4">
-        <div className="w-64 shrink-0 mr-5 mt-4">
-          <Facets />
-
-        </div>
-        <div className="flex-grow">
-          <div className="flex flex-col items-baseline">
-            <ResultsCount />
-            <AppliedFilters />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="flex mt-4">
+          <div className="w-64 shrink-0 mr-5 mt-4">
+            <Facets />
           </div>
-          <VerticalResults
-            CardComponent={FAQCard}
-            customCssClasses={{
-              verticalResultsContainer: `max-w-screen-xl`,
-            }}
-          />
-          <Pagination />
-          <LocationBias />
+          <div className="flex-grow">
+            <div className="flex flex-col items-baseline">
+              <ResultsCount />
+              <AppliedFilters />
+            </div>
+            <VerticalResults
+              CardComponent={FAQCard}
+              customCssClasses={{
+                verticalResultsContainer: `max-w-screen-xl`,
+              }}
+            />
+            <Pagination />
+            <LocationBias />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

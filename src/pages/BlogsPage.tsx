@@ -10,11 +10,12 @@ import {
 import * as React from "react";
 import { useEffect } from "react";
 import { BlogCard } from "../components/cards/BlogCard";
+import Loader from "../components/Loader";
 
 const BlogsPage = () => {
   const searchActions = useSearchActions();
-  const loadingState =
-    useSearchState((state) => state.searchStatus.isLoading) || true;
+  const isLoading =
+    useSearchState((state) => state.searchStatus.isLoading);
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -26,27 +27,31 @@ const BlogsPage = () => {
 
   return (
     <>
-      <div className="flex mt-4">
-        <div className="w-64 shrink-0 mr-5 mt-4">
-          <Facets />
-        </div>
-        <div className="flex-grow">
-          <div className="flex flex-col items-baseline">
-            <ResultsCount />
-            <AppliedFilters />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="flex mt-4">
+          <div className="w-64 shrink-0 mr-5 mt-4">
+            <Facets />
           </div>
-          <VerticalResults
-            CardComponent={BlogCard}
-            customCssClasses={{
-              verticalResultsContainer: `grid grid-cols-3 gap-2`,
-            }}
-          />
-          <div className="mt-6">
-            <Pagination />
-            <LocationBias />
+          <div className="flex-grow">
+            <div className="flex flex-col items-baseline">
+              <ResultsCount />
+              <AppliedFilters />
+            </div>
+            <VerticalResults
+              CardComponent={BlogCard}
+              customCssClasses={{
+                verticalResultsContainer: `grid grid-cols-3 gap-2`,
+              }}
+            />
+            <div className="mt-6">
+              <Pagination />
+              <LocationBias />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
