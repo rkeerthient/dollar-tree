@@ -14,7 +14,6 @@ import {
   useSearchActions,
   provideHeadless,
   VerticalResults as VerticalResultsData,
-  UniversalLimit,
 } from "@yext/search-headless-react";
 import Product from "../types/products";
 import searchConfig from "./searchConfig";

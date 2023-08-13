@@ -19,7 +19,6 @@ export const config: TemplateConfig = {
     $id: "category-pages",
     fields: [
       "id",
-      // "entityType",
       "name",
       "slug",
       "description",
@@ -65,6 +64,7 @@ const CategoryResults: Template<TemplateRenderProps> = ({
 }: TemplateRenderProps) => {
   const { _site, meta, name, description, dm_directoryChildren } = document;
   const entityType = meta.entityType.id;
+  console.log(entityType !== "ce_category3" || !entityType);
 
   const getFieldId = () => {
     if (entityType === "ce_category1") {
@@ -87,28 +87,27 @@ const CategoryResults: Template<TemplateRenderProps> = ({
     return {
       name: parent.name,
       href: parent.slug,
-      current: false,
     };
   });
-
-  const subCategoryLinks = document.dm_directoryChildren
-    ?.slice(1)
-    .map((child: any) => {
-      return {
-        name: child.name,
-        href: child.slug,
-      };
-    });
 
   return (
     <>
       <PageLayout _site={_site}>
         <div className="centered-container">
-          <Breadcrumbs links={breadcrumbs}></Breadcrumbs>
+          <Breadcrumbs
+            links={
+              breadcrumbs && breadcrumbs.length >= 1
+                ? [...breadcrumbs, { name: name }]
+                : breadcrumbs
+            }
+          />
           <ProductPage
             subCatrgories={
-              entityType !== "ce_category3" ? dm_directoryChildren : undefined
+              entityType !== "ce_category3" || !entityType
+                ? dm_directoryChildren
+                : undefined
             }
+            selectedName={name !== "Home" && name}
             initialFilter={entityType !== "ce_root" ? initialFilter : undefined}
             selectedFilter={getFieldId()}
             breadcrumbLinks={breadcrumbs ? [...breadcrumbs, { name }] : []}

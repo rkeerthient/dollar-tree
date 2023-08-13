@@ -22,14 +22,18 @@ type ProductPageProps = {
   breadcrumbLinks?: any[];
   selectedFilter: string;
   subCatrgories?: DirectoryItem[];
+  selectedName: string;
 };
 const ProductPage = ({
   initialFilter,
   selectedFilter,
   subCatrgories,
+  selectedName,
 }: ProductPageProps) => {
   const searchActions = useSearchActions();
   const isLoading = useSearchState((state) => state.searchStatus.isLoading);
+  console.log(JSON.stringify(selectedName));
+
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const query = urlSearchParams.get("query");
@@ -48,6 +52,12 @@ const ProductPage = ({
         <div className="w-64 shrink-0 mr-5 mt-4">
           {subCatrgories && (
             <>
+              {selectedName && (
+                <>
+                  <div className="text-2xl text-[#5da36e]">{selectedName}</div>
+                  <hr className="my-4" />
+                </>
+              )}
               <Department data={subCatrgories}></Department>
               <hr className="my-4" />
             </>
@@ -55,12 +65,11 @@ const ProductPage = ({
           <Facets excludedFieldIds={[selectedFilter]}></Facets>
         </div>
         <div className="flex-grow">
-          <div className="flex flex-col items-baseline">
-            <ResultsCount />
-            <AppliedFilters hiddenFields={[selectedFilter]} />
+          <div className="flex  items-baseline justify-between">
+            <ResultsCount /> <SortDropdown />
           </div>
-          <div className="flex justify-end mb-4">
-            <SortDropdown />
+          <div className="flex justify-between mb-4">
+            <AppliedFilters hiddenFields={[selectedFilter]} />
           </div>
           <VerticalResults
             CardComponent={ProductCard}
