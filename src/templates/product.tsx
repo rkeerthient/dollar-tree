@@ -16,6 +16,10 @@ import { Tab } from "@headlessui/react";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import * as classNames from "classnames";
 import RTF from "../components/RTF";
+import { StarIcon } from "@heroicons/react/20/solid";
+import Dropdown from "../components/Dropdown";
+import Radio from "../components/Radio";
+import { dummyReviews } from "../components/data.js";
 
 /**
  * Required when Knowledge Graph data is used for a template.
@@ -30,11 +34,15 @@ export const config: TemplateConfig = {
       "uid",
       "meta",
       "name",
+      "c_rating",
+      "c_noOfVotes",
       "photoGallery",
       "c_richTextDescription",
       "slug",
       "price",
       "color",
+      "sku",
+      "c_sets",
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
@@ -118,6 +126,10 @@ const Product: Template<TemplateRenderProps> = ({
     price,
     color,
     __meta,
+    c_rating,
+    c_noOfVotes,
+    c_sets,
+    sku,
   } = document;
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
@@ -181,52 +193,42 @@ const Product: Template<TemplateRenderProps> = ({
 
                   {/* Product info */}
                   <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-                    <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-                      {name}
-                    </h1>
-
+                    <div className="space-y-4">
+                      <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
+                        {name}
+                      </h1>
+                      <div> SKU: {sku}</div>
+                      <div className="ml-1 flex items-center">
+                        {[0, 1, 2, 3, 4].map((rating) => (
+                          <StarIcon
+                            key={rating}
+                            className={classNames(
+                              c_rating > rating
+                                ? "text-green-500"
+                                : "text-gray-200",
+                              "h-5 w-5 flex-shrink-0"
+                            )}
+                            aria-hidden="true"
+                          />
+                        ))}{" "}
+                        <div>{c_rating}</div> <div>({c_noOfVotes})</div>
+                      </div>
+                    </div>
+                    <hr className="my-3" />
                     <div className="mt-3">
                       <h2 className="sr-only">Product information</h2>
-                      <p className="text-3xl tracking-tight text-gray-900">
-                        {price.value}
+                      <p className="text-2xl tracking-tight text-gray-900 font-bold">
+                        <span className="text-base">$</span> {price.value}{" "}
+                        <span className="text-base font-light">each</span>
                       </p>
                     </div>
+                    <hr className="my-3" />
+                    <Dropdown price={price.value} sets={c_sets}></Dropdown>
+                    <hr className="my-3" />
+                    <Radio></Radio>
+                    <hr className="my-3" />
                     <form className="mt-6">
                       {/* Colors */}
-                      <div>
-                        <h3 className="text-sm text-gray-600">Color</h3>
-
-                        {/* <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-2">
-                          <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
-                          <span className="flex items-center space-x-3">
-                            {product.colors.map((color) => (
-                              <RadioGroup.Option
-                                key={color.name}
-                                value={color}
-                                className={({ active, checked }) =>
-                                  classNames(
-                                    color.selectedColor,
-                                    active && checked ? 'ring ring-offset-1' : '',
-                                    !active && checked ? 'ring-2' : '',
-                                    'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
-                                  )
-                                }
-                              >
-                                <RadioGroup.Label as="span" className="sr-only">
-                                  {color.name}
-                                </RadioGroup.Label>
-                                <span
-                                  aria-hidden="true"
-                                  className={classNames(
-                                    color.bgColor,
-                                    'h-8 w-8 rounded-full border border-black border-opacity-10'
-                                  )}
-                                />
-                              </RadioGroup.Option>
-                            ))}
-                          </span>
-                        </RadioGroup> */}
-                      </div>
 
                       <div className="mt-10 flex">
                         <button
@@ -262,6 +264,44 @@ const Product: Template<TemplateRenderProps> = ({
                 <div className="mt-6">
                   <h3 className="sr-only">Description</h3>
                   <RTF>{c_richTextDescription}</RTF>
+                </div>
+                <hr className="my-4" />
+                <div className="mt-4">
+                  {dummyReviews.reviews.map((item: any, index: number) => (
+                    <div
+                      key={index}
+                      style={{
+                        padding: "2em",
+                        borderBottom: " 1px solid gray",
+                      }}
+                    >
+                      <div
+                        className="flex"
+                        style={{ justifyContent: "space-between" }}
+                      >
+                        <div>{item.user}</div>
+                        <div>{item.date}</div>
+                      </div>
+                      <div className="ml-1 flex items-center">
+                        {[0, 1, 2, 3, 4].map((rating) => (
+                          <StarIcon
+                            key={rating}
+                            className={classNames(
+                              c_rating > item.rating
+                                ? "text-green-500"
+                                : "text-gray-200",
+                              "h-5 w-5 flex-shrink-0"
+                            )}
+                            aria-hidden="true"
+                          />
+                        ))}
+                      </div>
+                      <div style={{ fontSize: `1.5em`, fontWeight: "400" }}>
+                        {item.title}
+                      </div>
+                      <div style={{ color: "#6f6f6f" }}>{item.comment}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
