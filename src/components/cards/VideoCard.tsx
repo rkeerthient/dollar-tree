@@ -1,36 +1,34 @@
+import {
+  CardProps,
+  useCardAnalyticsCallback,
+  useCardFeedbackCallback,
+} from "@yext/search-ui-react";
 import * as React from "react";
-import { useState } from "react";
 import YouTube from "react-youtube";
-import Ce_video from "../../types/video";
-import { CardProps } from "@yext/search-ui-react";
 
-const VideoCard = (props: CardProps<Ce_video>) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const { name, description } = props.result;
-  const { landingPageUrl } = props.result.rawData;
-  const onReady = (event: any) => {
-    // You can use the `event.target` to control the player
+export function VideoCard(props: CardProps<any>): JSX.Element {
+  const { result } = props;
+  const opts = {
+    height: "270",
+    width: "380",
   };
-
-  const onPlayPauseClick = () => {
-    setIsPlaying((prevIsPlaying) => !prevIsPlaying);
+  const _onReady = (e: any) => {
+    e.target.pauseVideo();
   };
 
   return (
-    <div>
-      <div className="flex flex-col gap-3 h-full">
-        <div>
-          <YouTube
-            videoId={landingPageUrl?.split("/").pop()}
-            onReady={onReady}
-            playing={isPlaying}
-          />
-        </div>
-        <div className="font-semibold">{name}</div>
-        <div>{description}</div>
+    <div className="flex flex-col justify-between border rounded-lg mb-4 shadow-sm">
+      <YouTube
+        videoId={result.rawData.landingPageUrl?.split("v=")[1]}
+        onReady={_onReady}
+        opts={opts}
+        className="border"
+      />
+      <div className="px-4">
+        <p className="text-xl font-bold mt-4">{result.name}</p>
+        <p className="mt-4">Posted - {result.rawData.datePosted}</p>
+        <p className="mt-4">Description: {result.description}</p>
       </div>
     </div>
   );
-};
-
-export default VideoCard;
+}

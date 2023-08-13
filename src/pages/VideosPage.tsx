@@ -9,13 +9,12 @@ import {
 } from "@yext/search-ui-react";
 import * as React from "react";
 import { useEffect } from "react";
-import VideoCard from "../components/cards/VideoCard";
 import Loader from "../components/Loader";
+import { VideoCard } from "../components/cards/VideoCard";
 
 const VideosPage = ({ sendDataToParent }: any) => {
   const searchActions = useSearchActions();
-  const isLoading =
-    useSearchState((state) => state.searchStatus.isLoading);
+  const isLoading = useSearchState((state) => state.searchStatus.isLoading);
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -39,7 +38,7 @@ const VideosPage = ({ sendDataToParent }: any) => {
             <VerticalResults
               CardComponent={VideoCard}
               customCssClasses={{
-                verticalResultsContainer: `grid grid-cols-3 gap-2`,
+                verticalResultsContainer: "grid grid-cols-3 gap-4",
               }}
             />
             <Pagination />
