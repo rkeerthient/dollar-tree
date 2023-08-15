@@ -7,21 +7,38 @@ const BlogCard = ({ result }: CardProps<any>) => {
   const blogImage = blog.primaryPhoto;
 
   return (
-    <div className="border flex flex-col gap-10">
-      <div>{blogImage && <Image layout="fill" image={blogImage} />}</div>
-      <div className="p-4 ">
-        <p className="h-10">{blog.name}</p>
-        <p className="text-gray-400 text-sm mt-2 font-semibold">
-          Posted on - {blog.datePosted}
-        </p>
-        <div className="flex justify-between  h-56 mt-4">
-          <div className="  text-sm">{blog.description}</div>
+    <div className="flex flex-col items-start justify-between">
+      <div className="relative w-full">
+        <img
+          src={blogImage.image.url}
+          alt=""
+          className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+        />
+        <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+      </div>
+      <div className="max-w-xl">
+        <div className="mt-8 flex items-center gap-x-4 text-xs">
+          <time dateTime={blog.datePosted} className="text-gray-500">
+            {blog.datePosted}
+          </time>
+          <span
+           
+            className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
+          >
+            {blog.c_blogsCategory}
+          </span>
         </div>
-        <a href={blog.landingPageUrl}>
-          <div className="px-4 py-2 w-fit border-[#5da36e] border-2 mt-4 hover:cursor-pointer">
-            Learn more
-          </div>
-        </a>
+        <div className="group relative">
+          <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+            <a href={blog.landingPageUrl}>
+              <span className="absolute inset-0" />
+              {blog.name}
+            </a>
+          </h3>
+          <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+            {blog.description}
+          </p>
+        </div>
       </div>
     </div>
   );

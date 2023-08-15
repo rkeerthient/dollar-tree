@@ -14,8 +14,7 @@ import Loader from "../components/Loader";
 
 const BlogsPage = () => {
   const searchActions = useSearchActions();
-  const isLoading =
-    useSearchState((state) => state.searchStatus.isLoading);
+  const isLoading = useSearchState((state) => state.searchStatus.isLoading);
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -42,7 +41,7 @@ const BlogsPage = () => {
             <VerticalResults
               CardComponent={BlogCard}
               customCssClasses={{
-                verticalResultsContainer: `grid grid-cols-3 gap-2`,
+                verticalResultsContainer: `mx-auto mt-16 grid  grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2`,
               }}
             />
             <div className="mt-6">
