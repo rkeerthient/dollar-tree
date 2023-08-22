@@ -14,6 +14,7 @@ import { ProductCard } from "../components/cards/ProductCard";
 import UnivLocationCard from "../components/cards/univLocCard";
 import { BlogCard } from "../components/cards/BlogCard";
 import Loader from "../components/Loader";
+import { PromoCard } from "../components/cards/PromoCard";
 
 const HomePage = () => {
   const loading = useSearchState((state) => state.searchStatus.isLoading);
@@ -82,6 +83,20 @@ const HomePage = () => {
       </div>
     );
   };
+  const PromoSection = ({ results, CardComponent }: any) => {
+    if (!CardComponent) {
+      return <div>Missing Card Component</div>;
+    }
+    return (
+      <div>
+        <div className="">
+          {results.map((r: any, index: number) => (
+            <CardComponent key={index} result={r} />
+          ))}
+        </div>
+      </div>
+    );
+  };
   const buildResponse = (snippet: any) => {
     return (
       <div className="flex flex-col bg-white my-4 mb-8 p-4 gap-4">
@@ -143,6 +158,12 @@ const HomePage = () => {
               locations: {
                 CardComponent: UnivLocationCard,
                 SectionComponent: LocationSection,
+                viewAllButton: true,
+              },
+              promotion: {
+                CardComponent: PromoCard,
+                SectionComponent: PromoSection,
+                label: "Promotions",
                 viewAllButton: true,
               },
             }}
