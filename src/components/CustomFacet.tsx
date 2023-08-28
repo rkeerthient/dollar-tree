@@ -77,8 +77,11 @@ const CustomFacet = ({ fieldId }: TileFacetProps): JSX.Element | null => {
   };
 
   return facet && facet.options.length > 0 ? (
-    <div className="mb-4 bg-gray-200 p-3">
-      <div className="w-full mt-6 flex flex-wrap">
+    <div className="mb-4 bg-gray-200 p-3 flex flex-row text-sm">
+      <div className="max-w-fit flex-none text-[#017535] font-bold mt-2">
+        Store Amenities:
+      </div>
+      <div className="w-full  flex flex-wrap">
         {facet.options.map((o, i) => (
           <div key={`${fieldId}_${i}`} className="mr-3 mb-3">
             <div className="px-3 text-sm ">
@@ -105,7 +108,7 @@ const CustomFacet = ({ fieldId }: TileFacetProps): JSX.Element | null => {
                   />
                 </div>
 
-                <div className="text-sm">
+                <div>
                   <span>{o.displayName}</span>
                   <span>({o.count})</span>
                 </div>
