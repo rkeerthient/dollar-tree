@@ -1,16 +1,8 @@
 import * as React from "react";
 import Banner from "../components/banner";
 import Cta from "../components/cta";
-import Address from "../components/Address";
-import PhotoGallery from "../components/PhotoGallery";
 import Hours from "../components/hours";
-import Faqs from "../components/Faqs";
 import PageLayout from "../components/PageLayout";
-import BreadCrumbs from "../components/Breadcrumbs";
-import {
-  formatPhoneNumber,
-  formatPhoneNumberIntl,
-} from "react-phone-number-input";
 // import Favicon from "../public/yext-favicon.ico";
 import "../index.css";
 import {
