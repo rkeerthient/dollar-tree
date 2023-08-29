@@ -223,7 +223,7 @@ const Product: Template<TemplateRenderProps> = ({
                       </p>
                     </div>
                     <hr className="my-3" />
-                    <Dropdown price={price.value} sets={c_sets}></Dropdown>
+                    {c_sets && <Dropdown price={price.value} sets={c_sets}></Dropdown>}
                     <hr className="my-3" />
                     <Radio></Radio>
                     <hr className="my-3" />
