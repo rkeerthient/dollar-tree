@@ -1,0 +1,15 @@
+export { default as HybridStores } from "./Hybrid stores.png";
+export { default as AcceptsEBT } from "./Accepts EBT.png";
+export { default as AdultBeverages } from "./Adult beverages.png";
+export { default as ATM } from "./ATM.png";
+export { default as BillPay } from "./Bill pay.png";
+export { default as BOPIS } from "./BOPIS.png";
+export { default as RefrigeratedFrozen } from "./Frozen.png";
+export { default as Helium } from "./Helium.png";
+export { default as HybridAtores } from "./Hybrid stores.png";
+export { default as Ice } from "./Ice.png";
+export { default as Propane } from "./Propane.png";
+export { default as RedBox } from "./Red box.png";
+export { default as Tobacco } from "./Tobacco.png";
+export { default as WaterMachine } from "./Water machine.png";
+export { default as WomenInfantsAndChildrenWIC } from "./Women, Infants and Children(WIC).png";

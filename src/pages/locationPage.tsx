@@ -15,6 +15,7 @@ import {
   LocationBias,
   Coordinate,
   MapboxMapProps,
+  Facets,
 } from "@yext/search-ui-react";
 import { LngLat, LngLatBounds } from "mapbox-gl";
 import * as React from "react";
@@ -22,6 +23,7 @@ import MapPin from "../components/MapPin";
 import "mapbox-gl/dist/mapbox-gl.css";
 import LocationCard from "../components/cards/LocationCard";
 import Loader from "../components/Loader";
+import CustomFacet from "../components/CustomFacet";
 
 export interface Location {
   yextDisplayCoordinate?: Coordinate;
@@ -37,7 +39,7 @@ const LocationPage = () => {
   const isLoading =
     useSearchState((state) => state.searchStatus.isLoading) || false;
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     searchActions.setVertical("locations");
     searchActions.executeVerticalQuery().then(() => setLoading(false));
   }, [searchActions]);
@@ -69,7 +71,11 @@ const LocationPage = () => {
 
   return (
     <>
-      {!isLoading ? (
+      <div>
+        <ResultsCount />
+        <CustomFacet fieldId={"services"}></CustomFacet>
+      </div>
+      {isLoading ? (
         <Loader />
       ) : (
         <div>
@@ -78,7 +84,6 @@ const LocationPage = () => {
               className="flex flex-col w-2/5  p-4 overflow-scroll"
               style={{ height: "95vh" }}
             >
-              <ResultsCount />
               <AppliedFilters />
               <VerticalResults CardComponent={LocationCard} />
               <Pagination />
