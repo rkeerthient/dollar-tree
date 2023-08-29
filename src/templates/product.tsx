@@ -143,7 +143,7 @@ const Product: Template<TemplateRenderProps> = ({
               <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                 <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
                   <Tab.Group as="div" className="flex flex-col-reverse">
-                    {photoGallery.length >= 2 && (
+                    {photoGallery && photoGallery.length >= 2 && (
                       <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
                         <Tab.List className="grid grid-cols-4 gap-6">
                           {photoGallery.map((image) => (
@@ -179,7 +179,7 @@ const Product: Template<TemplateRenderProps> = ({
                     )}
 
                     <Tab.Panels className="aspect-h-1 aspect-w-1 w-full">
-                      {photoGallery.map((image) => (
+                      {photoGallery && photoGallery.map((image) => (
                         <Tab.Panel key={image.id}>
                           <img
                             src={image.image.url}
