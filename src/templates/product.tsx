@@ -21,6 +21,7 @@ import Dropdown from "../components/Dropdown";
 import Radio from "../components/Radio";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { dummyReviews } from "../components/data.js";
+import { BsFillCartFill } from "react-icons/bs";
 
 /**
  * Required when Knowledge Graph data is used for a template.
@@ -236,10 +237,6 @@ const Product: Template<TemplateRenderProps> = ({
                     <hr className="my-3" />
                     <div className="mt-3">
                       <h2 className="sr-only">Product information</h2>
-                      {/* <p className="text-2xl tracking-tight text-gray-900 font-bold">
-                        <span className="text-base">$</span> {price.value}{" "}
-                        <span className="text-base font-light">each</span>
-                      </p> */}
                       <div className="text-2xl font-bold">
                         <span className="text-base font-light align-top">
                           $
@@ -271,9 +268,10 @@ const Product: Template<TemplateRenderProps> = ({
                       <div className="mt-10 flex">
                         <button
                           type="submit"
-                          className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-400 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full uppercase"
+                          className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-[#1e62c1] px-8 py-3  font-medium text-white  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full uppercase gap-6 text-lg"
                         >
                           <div>Add to bag</div>
+                          <BsFillCartFill />
                         </button>
                       </div>
                     </form>
@@ -288,9 +286,18 @@ const Product: Template<TemplateRenderProps> = ({
                   </div>
                 </div>
                 <hr className="my-4" />
-                <div className="mt-6">
-                  <h3 className="sr-only">Description</h3>
-                  <RTF>{c_richTextDescription}</RTF>
+                <div className="my-6">
+                  <h3 className="text-[#198641] font-bold text-xl">
+                    Product Details
+                  </h3>
+                  <div className="text-sm">
+                    <RTF>
+                      {c_richTextDescription.replace(
+                        "Specifications",
+                        "\n **Specifications**\n"
+                      )}
+                    </RTF>
+                  </div>
                 </div>
                 <hr className="my-4" />
                 <div className="mt-4">
@@ -340,7 +347,3 @@ const Product: Template<TemplateRenderProps> = ({
 };
 
 export default Product;
-
-const buildBreadCrumbLinks = (crumbs, name) => {
-  return Breadcrumbs;
-};

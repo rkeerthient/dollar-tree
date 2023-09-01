@@ -59,6 +59,7 @@ export default function RTF({
                 className: "underline hover:no-underline text-brand-primary",
               },
             },
+            p: { props: { className: "py-3 px-0 leading-6" } },
             h1: { props: { className: Heading.Lead } },
             h2: { props: { className: Heading.Head } },
             h3: { props: { className: Heading.Sub } },
