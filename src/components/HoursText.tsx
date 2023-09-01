@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const HoursText = ({ document }: any) => {
+const HoursText = ({ document, styles }: any) => {
   const { hours, timezone } = document;
 
   const getStatus = (currentDay: any, currentTime: any, hours: any) => {
@@ -82,12 +82,14 @@ const HoursText = ({ document }: any) => {
   };
   const res = getDayName(hours, timezone);
   return (
-    <div className="hero mt-4 w-full">
+    <div className="hero  w-full">
       <div className="hero-row flex">
         <div
           className={
             res.status.includes("Open")
-              ? "text-2xl text-gray-600 Hero-hoursToday storeOpen flex gap-1 items-center w-max "
+              ? `${
+                  styles ? styles : "text-2xl text-gray-600"
+                } Hero-hoursToday storeOpen flex gap-1 items-center w-max`
               : "text-2xl text-gray-600 Hero-hoursToday storeClosed flex gap-1 items-center w-max "
           }
         >

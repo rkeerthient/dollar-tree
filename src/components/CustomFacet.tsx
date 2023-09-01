@@ -27,7 +27,7 @@ interface TileFacetProps {
   displayName?: string;
 }
 
-const capitalizeFirstLowercaseRest = (str: string) => {
+export const capitalizeFirstLowercaseRest = (str: string) => {
   console.log(str);
 
   if (str === "Refrigerated/Frozen") str = "Frozen";
@@ -44,7 +44,7 @@ const capitalizeFirstLowercaseRest = (str: string) => {
   return x;
 };
 
-const iconMapping: Record<string, string> = {
+export const iconMapping: Record<string, string> = {
   HybridStores: HybridStores,
   AcceptsEBT: AcceptsEBT,
   AdultBeverages: AdultBeverages,

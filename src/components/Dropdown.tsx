@@ -51,7 +51,10 @@ const Dropdown = ({ price, sets }: Ddprops) => {
           )}
         </div>
       </div>
-      <div className="text-3xl font-bold">${currPrice}</div>
+      <div className="text-3xl font-bold">
+        <span className="text-base font-light align-top">$</span>
+        {currPrice} <span className="text-base font-light mb-auto">Total</span>
+      </div>
     </div>
   );
 };
