@@ -282,10 +282,12 @@ const Product: Template<TemplateRenderProps> = ({
                 </h3>
                 <div className="text-sm">
                   <RTF>
-                    {c_richTextDescription.replace(
-                      "Specifications",
-                      "\n **Specifications**\n"
-                    )}
+                    {c_richTextDescription.includes("Specifications")
+                      ? c_richTextDescription.replace(
+                          "Specifications",
+                          "\n **Specifications**\n"
+                        )
+                      : c_richTextDescription}
                   </RTF>
                 </div>
               </div>
