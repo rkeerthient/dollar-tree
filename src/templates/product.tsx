@@ -19,6 +19,7 @@ import RTF from "../components/RTF";
 import { StarIcon } from "@heroicons/react/20/solid";
 import Dropdown from "../components/Dropdown";
 import Radio from "../components/Radio";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { dummyReviews } from "../components/data.js";
 
 /**
@@ -43,6 +44,8 @@ export const config: TemplateConfig = {
       "color",
       "sku",
       "c_sets",
+      "dm_directoryParents.name",
+      "dm_directoryParents.slug",
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
@@ -129,15 +132,30 @@ const Product: Template<TemplateRenderProps> = ({
     c_rating,
     c_noOfVotes,
     c_sets,
+    dm_directoryParents,
     sku,
   } = document;
+
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
   }
+  const breadcrumbs = document.dm_directoryParents?.map((parent: any) => {
+    return {
+      name: parent.name,
+      href: parent.slug,
+    };
+  });
   return (
     <>
       <PageLayout _site={_site} templateData={{ __meta, document }}>
         <div className="centered-container">
+          <Breadcrumbs
+            links={
+              breadcrumbs && breadcrumbs.length >= 1
+                ? [...breadcrumbs, { name: name }]
+                : breadcrumbs
+            }
+          />
           <div className="section">
             <div className="bg-white">
               <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -322,3 +340,7 @@ const Product: Template<TemplateRenderProps> = ({
 };
 
 export default Product;
+
+const buildBreadCrumbLinks = (crumbs, name) => {
+  return Breadcrumbs;
+};

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { AiOutlineCaretRight } from "react-icons/ai";
 
 export type Link = {
   name: string;
@@ -19,17 +19,17 @@ const Breadcrumbs = ({ links }: BreadcrumbsProps) => {
           <li key={link.name}>
             <div className="flex items-center">
               {idx !== 0 && (
-                <ChevronRightIcon className="h-4 w-4 flex-shrink-0  text-[#5da36e]"></ChevronRightIcon>
+                <AiOutlineCaretRight className="h-3 w-3 flex-shrink-0  text-gray-500"></AiOutlineCaretRight>
               )}
               {link.href ? (
                 <a
                   href={`/${link.href}`}
-                  className="ml-4 text-xs font-medium   hover:underline text-[#5da36e]"
+                  className="ml-4 text-xs font-medium   hover:underline text-[#198641]"
                 >
                   {link.name}
                 </a>
               ) : (
-                <span className="ml-4 text-xs font-medium  text-[#5da36e]">
+                <span className="ml-4 text-xs font-medium  text-[#198641]">
                   {link.name}
                 </span>
               )}
