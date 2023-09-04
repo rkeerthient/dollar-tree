@@ -13,7 +13,7 @@ import FAQCard from "../components/cards/FAQCard";
 import Loader from "../components/Loader";
 import JobCard from "../components/cards/JobCard";
 
-const FAQsPage = ({ sendDataToParent }: any) => {
+const JobsPage = ({ sendDataToParent }: any) => {
   const searchActions = useSearchActions();
   const isLoading = useSearchState((state) => state.searchStatus.isLoading);
 
@@ -54,4 +54,4 @@ const FAQsPage = ({ sendDataToParent }: any) => {
   );
 };
 
-export default FAQsPage;
+export default JobsPage;

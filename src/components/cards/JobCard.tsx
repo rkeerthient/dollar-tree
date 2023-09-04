@@ -1,13 +1,12 @@
 import { CardProps } from "@yext/search-ui-react";
 import * as React from "react";
-import { useState } from "react";
 
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import RTF from "../RTF";
 import Job from "../../types/jobs";
 import { Disclosure, Transition } from "@headlessui/react";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Cta from "../cta";
+import { FiMapPin } from "react-icons/fi";
 
 const JobCard = (props: CardProps<Job>): JSX.Element => {
   const { result } = props;
@@ -15,9 +14,20 @@ const JobCard = (props: CardProps<Job>): JSX.Element => {
   return (
     <div className="w-full  my-4 border p-4">
       <div>
-        <span className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-          {result.name}
-        </span>
+        <div className="flex flex-col mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 gap-3">
+          <div>{result.name}</div>
+          <div className="flex gap-2 text-sm items-center">
+            <div>
+              <FiMapPin />
+            </div>
+            <div> {result.rawData.location?.externalLocation}</div>
+          </div>
+          <div className="text-sm text-gray-600">
+            Posted on {formatDateToCustomString(result.rawData.datePosted)} |{" "}
+            {result.rawData.employmentType} |{" "}
+          </div>
+        </div>
+
         <Disclosure>
           {({ open }) => (
             <>
@@ -74,49 +84,29 @@ const JobCard = (props: CardProps<Job>): JSX.Element => {
 
 export default JobCard;
 
-// import { CardProps } from "@yext/search-ui-react";
-// import * as React from "react";
-// import { useState } from "react";
-// import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
-// import RTF from "../RTF";
-// import Job from "../../types/jobs";
-// import { Disclosure, Transition } from "@headlessui/react";
+function formatDateToCustomString(inpDate: string) {
+  const date = new Date(inpDate);
+  const day = date.getDate();
+  const month = date.toLocaleString("default", { month: "short" });
+  const year = date.getFullYear();
 
-// const JobCard = (props: CardProps<Job>): JSX.Element => {
-//   return (
-//     <div className="w-full px-4 pt-16">
-//       <div className="mx-auto w-full max-w-md rounded-2xl bg-white p-2">
-//         <Disclosure>
-//           {({ open }) => (
-//             <>
-//               <Disclosure.Button className="flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-//                 <span>What is your refund policy?</span>
-//                 <ChevronUpIcon
-//                   className={`${
-//                     open ? "rotate-180 transform" : ""
-//                   } h-5 w-5 text-purple-500`}
-//                 />
-//               </Disclosure.Button>
-//               <Transition
-//                 enter="transition duration-100 ease-out"
-//                 enterFrom="transform scale-95 opacity-0"
-//                 enterTo="transform scale-100 opacity-100"
-//                 leave="transition duration-75 ease-out"
-//                 leaveFrom="transform scale-100 opacity-100"
-//                 leaveTo="transform scale-95 opacity-0"
-//               >
-//                 <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-//                   If you're unhappy with your purchase for any reason, email us
-//                   within 90 days and we'll refund you in full, no questions
-//                   asked.
-//                 </Disclosure.Panel>
-//               </Transition>
-//             </>
-//           )}
-//         </Disclosure>
-//       </div>
-//     </div>
-//   );
-// };
+  const suffix = getDaySuffix(day);
 
-// export default JobCard;
+  return `${day}${suffix} ${month} ${year}`;
+}
+
+function getDaySuffix(day: number) {
+  if (day >= 11 && day <= 13) {
+    return "th";
+  }
+  switch (day % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+}
