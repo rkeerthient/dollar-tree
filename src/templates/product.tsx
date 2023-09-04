@@ -300,16 +300,18 @@ const Product: Template<TemplateRenderProps> = ({
                 <h3 className="text-[#198641] font-bold text-xl">
                   Product Details
                 </h3>
-                <div className="text-sm">
-                  <RTF>
-                    {c_richTextDescription.includes("Specifications")
-                      ? c_richTextDescription.replace(
-                          "Specifications",
-                          "\n **Specifications**\n"
-                        )
-                      : c_richTextDescription}
-                  </RTF>
-                </div>
+                {c_richTextDescription && (
+                  <div className="text-sm">
+                    <RTF>
+                      {c_richTextDescription.includes("Specifications")
+                        ? c_richTextDescription.replace(
+                            "Specifications",
+                            "\n **Specifications**\n"
+                          )
+                        : c_richTextDescription}
+                    </RTF>
+                  </div>
+                )}
               </div>
               <h3 className="text-[#198641] font-bold text-xl">
                 Rating & Reviews
