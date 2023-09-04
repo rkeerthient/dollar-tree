@@ -274,22 +274,6 @@ export interface ReservationUrl {
 	preferDisplayUrl?: boolean,
 }
 
-export enum Presentation {
-	BUTTON = "Button",
-	LINK = "Link",
-}
-
-export interface UberLink {
-	text?: string,
-	presentation: Presentation,
-}
-
-export interface UberTripBranding {
-	text: string,
-	url: string,
-	description: string,
-}
-
 export interface WebsiteUrl {
 	url?: string,
 	displayUrl?: string,
@@ -407,9 +391,6 @@ export default interface Location {
 	tollFreePhone?: any,
 	ttyPhone?: any,
 	twitterHandle?: string,
-	uberClientId?: string,
-	uberLink?: UberLink,
-	uberTripBranding?: UberTripBranding,
 	walkableCoordinate?: Coordinate,
 	websiteUrl?: WebsiteUrl,
 	yearEstablished?: number,

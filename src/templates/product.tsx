@@ -47,6 +47,9 @@ export const config: TemplateConfig = {
       "c_sets",
       "dm_directoryParents.name",
       "dm_directoryParents.slug",
+      "c_productCategory1",
+      "c_productCategory2",
+      "c_productCategory3",
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
@@ -134,18 +137,35 @@ const Product: Template<TemplateRenderProps> = ({
     c_noOfVotes,
     c_sets,
     dm_directoryParents,
+    c_productCategory1,
+    c_productCategory2,
+    c_productCategory3,
     sku,
   } = document;
 
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
   }
-  const breadcrumbs = document.dm_directoryParents?.map((parent: any) => {
-    return {
-      name: parent.name,
-      href: parent.slug,
-    };
-  });
+
+  const breadcrumbs = dm_directoryParents
+    ? dm_directoryParents?.map((parent: any) => {
+        return {
+          name: parent.name,
+          href: parent.slug,
+        };
+      })
+    : [
+        {
+          name: "Home",
+          href: "root.html",
+        },
+        {
+          name: c_productCategory1,
+        },
+        {
+          name: c_productCategory2,
+        },
+      ];
   return (
     <>
       <PageLayout _site={_site} templateData={{ __meta, document }}>

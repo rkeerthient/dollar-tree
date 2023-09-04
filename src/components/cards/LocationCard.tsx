@@ -11,8 +11,7 @@ const metersToMiles = (meters: number) => {
 };
 
 const LocationCard: CardComponent<any> = ({ result }) => {
-  console.log(JSON.stringify(result.rawData.services));
-
+ 
   const { address } = result.rawData;
   var gmaps = "https://www.google.com/maps/dir/?api=1&destination=";
   var gmapsAddress = gmaps.concat(

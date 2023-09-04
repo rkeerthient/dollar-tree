@@ -21,7 +21,7 @@ const BlogsPage = () => {
     const query = urlSearchParams.get("query");
     query && searchActions.setQuery(query);
     searchActions.setVertical("blogs");
-    searchActions.executeVerticalQuery().then((res) => console.log(res));
+    searchActions.executeVerticalQuery();
   }, []);
 
   return (

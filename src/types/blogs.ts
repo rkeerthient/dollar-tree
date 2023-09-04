@@ -19,18 +19,13 @@ export interface ComplexImage {
 	clickthroughUrl?: string,
 }
 
-export default interface Faq {
-	answerV2?: any,
-	landingPageUrl?: string,
-	nudgeEnabled?: boolean,
-	primaryConversationContact?: any,
-	question: string,
-	slug?: string,
-	logo?: ComplexImage,
+export default interface Ce_blogs {
+	datePosted?: string,
+	primaryPhoto?: ComplexImage,
+	description?: string,
 	name: string,
-	c_cCategory?: string,
-	c_richTextDescription?: string,
-	keywords?: string[],
+	c_blogsCategory?: string,
+	c_subcategory?: string,
+	c_type?: string,
 	id: string,
-	timezone?: any,
 }

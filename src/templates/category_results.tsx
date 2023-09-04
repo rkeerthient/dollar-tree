@@ -64,7 +64,6 @@ const CategoryResults: Template<TemplateRenderProps> = ({
 }: TemplateRenderProps) => {
   const { _site, meta, name, description, dm_directoryChildren } = document;
   const entityType = meta.entityType.id;
-  console.log(entityType !== "ce_category3" || !entityType);
 
   const getFieldId = () => {
     if (entityType === "ce_category1") {

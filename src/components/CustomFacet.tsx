@@ -28,8 +28,7 @@ interface TileFacetProps {
 }
 
 export const capitalizeFirstLowercaseRest = (str: string) => {
-  console.log(str);
-
+ 
   if (str === "Refrigerated/Frozen") str = "Frozen";
   let x = str
     .split(" ")
@@ -39,8 +38,7 @@ export const capitalizeFirstLowercaseRest = (str: string) => {
         : item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()
     )
     .join("");
-  console.log(x);
-
+ 
   return x;
 };
 

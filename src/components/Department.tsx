@@ -17,8 +17,7 @@ interface TreeNodeProps {
 }
 
 const Department = ({ data }: TreeStructureProps) => {
-  console.log(JSON.stringify(data));
-
+ 
   return <div className="space-y-2">{createTree(data)}</div>;
 };
 

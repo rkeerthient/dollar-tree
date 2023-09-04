@@ -20,8 +20,7 @@ const HomePage = () => {
   const loading = useSearchState((state) => state.searchStatus.isLoading);
   const featuredSnippet = useSearchState((state) => state.directAnswer.result);
   const res = useSearchState((state) => state.universal.verticals);
-  console.log(res);
-
+ 
   const LocationSection = ({ results, CardComponent, header }: any) => {
     return (
       <div>

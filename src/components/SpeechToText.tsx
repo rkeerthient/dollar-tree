@@ -19,8 +19,6 @@ const SpeechToText = ({ sendDataToParent }: any) => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
-    console.log(transcript);
-
     transcript && sendDataToParent(transcript, isListening);
   }, [transcript, isListening]);
 
@@ -66,7 +64,7 @@ const SpeechToText = ({ sendDataToParent }: any) => {
   };
 
   if (!browserSupportsSpeechRecognition) {
-    return <div>Speech recognition is not supported in your browser.</div>;
+    return <div></div>;
   }
 
   return (
