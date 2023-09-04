@@ -15,12 +15,14 @@ import UnivLocationCard from "../components/cards/univLocCard";
 import { BlogCard } from "../components/cards/BlogCard";
 import Loader from "../components/Loader";
 import { PromoCard } from "../components/cards/PromoCard";
+import { VideoCard } from "../components/cards/VideoCard";
+import JobCard from "../components/cards/JobCard";
 
 const HomePage = () => {
   const loading = useSearchState((state) => state.searchStatus.isLoading);
   const featuredSnippet = useSearchState((state) => state.directAnswer.result);
   const res = useSearchState((state) => state.universal.verticals);
- 
+
   const LocationSection = ({ results, CardComponent, header }: any) => {
     return (
       <div>
@@ -67,21 +69,7 @@ const HomePage = () => {
       </div>
     );
   };
-  const NewSection = ({ results, CardComponent, header }: any) => {
-    if (!CardComponent) {
-      return <div>Missing Card Component</div>;
-    }
-    return (
-      <div className="hidden">
-        <div>{header}</div>
-        <div className="grid grid-cols-2 gap-1 md:grid-cols-4 md:gap-8 ">
-          {results.map((r: any, index: number) => (
-            <CardComponent key={index} result={r} />
-          ))}
-        </div>
-      </div>
-    );
-  };
+
   const PromoSection = ({ results, CardComponent }: any) => {
     if (!CardComponent) {
       return <div>Missing Card Component</div>;
@@ -142,10 +130,21 @@ const HomePage = () => {
                 viewAllButton: true,
                 label: "FAQs",
               },
+              jobs: {
+                CardComponent: JobCard,
+                viewAllButton: true,
+                label: "Jobs",
+              },
               products: {
                 CardComponent: ProductCard,
                 SectionComponent: GridSection,
                 label: "Products",
+                viewAllButton: true,
+              },
+              video: {
+                CardComponent: VideoCard,
+                SectionComponent: GridSection3Col,
+                label: "Videos",
                 viewAllButton: true,
               },
               blogs: {

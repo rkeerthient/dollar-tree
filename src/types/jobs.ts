@@ -67,6 +67,8 @@ export default interface Job {
 	description?: string,
 	logo?: ComplexImage,
 	name: string,
+	c_cCategory?: string,
+	c_richTextDescription?: string,
 	displayCoordinate?: Coordinate,
 	keywords?: string[],
 	id: string,

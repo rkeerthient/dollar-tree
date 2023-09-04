@@ -41,6 +41,10 @@ const links: Link[] = [
     url: "/blogs",
   },
   {
+    label: "Jobs",
+    url: "/jobs",
+  },
+  {
     label: "Locations",
     url: "/locator",
   },
