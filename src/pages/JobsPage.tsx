@@ -4,12 +4,11 @@ import {
   AppliedFilters,
   Pagination,
   VerticalResults,
-  Geolocation,
+  LocationBias,
   Facets,
 } from "@yext/search-ui-react";
 import * as React from "react";
 import { useEffect } from "react";
-import FAQCard from "../components/cards/FAQCard";
 import Loader from "../components/Loader";
 import JobCard from "../components/cards/JobCard";
 
@@ -46,7 +45,7 @@ const JobsPage = () => {
               }}
             />
             <Pagination />
-            <Geolocation />
+            <LocationBias />
           </div>
         </div>
       )}

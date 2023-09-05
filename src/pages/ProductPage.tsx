@@ -85,7 +85,7 @@ const ProductPage = ({
             ></VerticalResults>
             <div className="mt-8">
               <Pagination />
-              <Geolocation />
+              <LocationBias />
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import {
   AppliedFilters,
   Pagination,
   VerticalResults,
-  Geolocation,
+  LocationBias,
   Facets,
 } from "@yext/search-ui-react";
 import * as React from "react";
@@ -45,7 +45,7 @@ const FAQsPage = () => {
               }}
             />
             <Pagination />
-            <Geolocation />
+            <LocationBias />
           </div>
         </div>
       )}

@@ -6,13 +6,14 @@ import {
   VerticalResults,
   Geolocation,
   Facets,
+  LocationBias,
 } from "@yext/search-ui-react";
 import * as React from "react";
 import { useEffect } from "react";
 import Loader from "../components/Loader";
 import { VideoCard } from "../components/cards/VideoCard";
 
-const VideosPage = ({ sendDataToParent }: any) => {
+const VideosPage = () => {
   const searchActions = useSearchActions();
   const isLoading = useSearchState((state) => state.searchStatus.isLoading);
 
@@ -42,7 +43,7 @@ const VideosPage = ({ sendDataToParent }: any) => {
               }}
             />
             <Pagination />
-            <Geolocation />
+            <LocationBias />
           </div>
         </div>
       )}

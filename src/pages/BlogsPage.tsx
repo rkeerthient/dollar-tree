@@ -6,6 +6,7 @@ import {
   VerticalResults,
   Geolocation,
   Facets,
+  LocationBias,
 } from "@yext/search-ui-react";
 import * as React from "react";
 import { useEffect } from "react";
@@ -46,7 +47,7 @@ const BlogsPage = () => {
             />
             <div className="mt-6">
               <Pagination />
-              <Geolocation />
+              <LocationBias />
             </div>
           </div>
         </div>
