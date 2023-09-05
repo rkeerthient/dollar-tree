@@ -4,7 +4,7 @@ import {
   AppliedFilters,
   Pagination,
   VerticalResults,
-  LocationBias,
+  Geolocation,
   Facets,
 } from "@yext/search-ui-react";
 import * as React from "react";
@@ -13,7 +13,7 @@ import FAQCard from "../components/cards/FAQCard";
 import Loader from "../components/Loader";
 import JobCard from "../components/cards/JobCard";
 
-const JobsPage = ({ sendDataToParent }: any) => {
+const JobsPage = () => {
   const searchActions = useSearchActions();
   const isLoading = useSearchState((state) => state.searchStatus.isLoading);
 
@@ -46,7 +46,7 @@ const JobsPage = ({ sendDataToParent }: any) => {
               }}
             />
             <Pagination />
-            <LocationBias />
+            <Geolocation />
           </div>
         </div>
       )}

@@ -4,7 +4,7 @@ import {
   AppliedFilters,
   Pagination,
   VerticalResults,
-  LocationBias,
+  Geolocation,
   Facets,
 } from "@yext/search-ui-react";
 import * as React from "react";
@@ -42,7 +42,7 @@ const VideosPage = ({ sendDataToParent }: any) => {
               }}
             />
             <Pagination />
-            <LocationBias />
+            <Geolocation />
           </div>
         </div>
       )}

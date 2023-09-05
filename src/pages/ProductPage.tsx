@@ -10,6 +10,7 @@ import {
   Pagination,
   ResultsCount,
   VerticalResults,
+  Geolocation,
 } from "@yext/search-ui-react";
 import * as React from "react";
 import { useEffect } from "react";
@@ -84,7 +85,7 @@ const ProductPage = ({
             ></VerticalResults>
             <div className="mt-8">
               <Pagination />
-              <LocationBias />
+              <Geolocation />
             </div>
           </div>
         </div>

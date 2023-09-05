@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Transition } from "@headlessui/react";
 import { MapPinComponent } from "./MapboxMap";
+import Location from "../types/locations";
+import * as React from "react";
 
 const MapPin: MapPinComponent<Location> = ({ result }) => {
   const [showCard, setShowCard] = useState(false);
@@ -44,10 +46,6 @@ const MapPin: MapPinComponent<Location> = ({ result }) => {
       >
         <path d="M30 15.0882C30 23.4212 23.3333 30.7353 15 38C7.22222 31.2941 0 23.4212 0 15.0882C0 6.75523 6.71573 0 15 0C23.2843 0 30 6.75523 30 15.0882Z" />
       </svg>
-      {/* <img
-        src="https://dollartree.com/file/v8569639453284500459/general/Dollar-Tree-Icon-RGB-SM.png"
-        alt=""
-      /> */}
     </div>
   );
 };

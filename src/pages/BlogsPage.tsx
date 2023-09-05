@@ -4,7 +4,7 @@ import {
   AppliedFilters,
   Pagination,
   VerticalResults,
-  LocationBias,
+  Geolocation,
   Facets,
 } from "@yext/search-ui-react";
 import * as React from "react";
@@ -46,7 +46,7 @@ const BlogsPage = () => {
             />
             <div className="mt-6">
               <Pagination />
-              <LocationBias />
+              <Geolocation />
             </div>
           </div>
         </div>
