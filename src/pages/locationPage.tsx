@@ -1,30 +1,26 @@
 import {
   useSearchActions,
+  Matcher,
   useSearchState,
   SelectableStaticFilter,
-  Matcher,
 } from "@yext/search-headless-react";
 import {
-  OnDragHandler,
-  SearchBar,
-  ResultsCount,
   AppliedFilters,
-  Pagination,
-  MapboxMap,
+  ResultsCount,
+  SearchBar,
+  StandardCard,
   VerticalResults,
   LocationBias,
-  Coordinate,
+  MapboxMap,
+  Pagination,
   MapboxMapProps,
-  Geolocation,
-  Facets,
+  OnDragHandler,
+  Coordinate,
 } from "@yext/search-ui-react";
 import { LngLat, LngLatBounds } from "mapbox-gl";
+import { useCallback, useLayoutEffect } from "react";
 import * as React from "react";
 import MapPin from "../components/MapPin";
-import "mapbox-gl/dist/mapbox-gl.css";
-import LocationCard from "../components/cards/LocationCard";
-import Loader from "../components/Loader";
-import CustomFacet from "../components/CustomFacet";
 
 export interface Location {
   yextDisplayCoordinate?: Coordinate;
@@ -33,19 +29,16 @@ export interface Location {
 const mapboxOptions: MapboxMapProps<Location>["mapboxOptions"] = {
   zoom: 10,
 };
-const LocationPage = () => {
+
+export function LocationsPage() {
   const searchActions = useSearchActions();
   const filters = useSearchState((state) => state.filters.static);
-  const [loading, setLoading] = React.useState(true);
-  const isLoading =
-    useSearchState((state) => state.searchStatus.isLoading) || false;
-
-  React.useEffect(() => {
-    searchActions.setVertical("locations");
-    searchActions.executeVerticalQuery().then(() => setLoading(false));
+  useLayoutEffect(() => {
+    searchActions.setVertical("KM");
+    searchActions.executeVerticalQuery();
   }, [searchActions]);
 
-  const onDrag: OnDragHandler = React.useCallback(
+  const onDrag: OnDragHandler = useCallback(
     (center: LngLat, bounds: LngLatBounds) => {
       const radius = center.distanceTo(bounds.getNorthEast());
       const nonLocationFilters: SelectableStaticFilter[] =
@@ -69,42 +62,28 @@ const LocationPage = () => {
     },
     [filters, searchActions]
   );
-  //Test
   return (
-    <>
-      <div>
-        <ResultsCount />
-        <CustomFacet fieldId={"services"}></CustomFacet>
-      </div>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div>
-          <div className="flex flex-row">
-            <div
-              className="flex flex-col w-2/5  p-4 overflow-scroll"
-              style={{ height: "95vh" }}
-            >
-              <AppliedFilters />
-              <VerticalResults CardComponent={LocationCard} />
-              <Pagination />
-              <Geolocation />
-            </div>
-            <div className=" w-3/5 h-screen">
-              <MapboxMap
-                mapboxAccessToken={
-                  "pk.eyJ1Ijoic3VubnlrZWVydGhpIiwiYSI6ImNsNWh5ZGt3czAyejUzY3A3Y3pvZ2E0bTgifQ.TNHfh1HL0LwTzLxs2TOaBQ"
-                }
-                mapboxOptions={mapboxOptions}
-                PinComponent={MapPin}
-                onDrag={onDrag}
-              />
-            </div>
-          </div>
+    <div>
+      <SearchBar />
+      <div className="flex flex-col">
+        <div className="flex items-baseline">
+          <ResultsCount />
+          <AppliedFilters />
         </div>
-      )}
-    </>
+        <div className="h-80 mb-4">
+          <MapboxMap
+            mapboxAccessToken={
+              process.env.YEXT_PUBLIC_MAP_API_KEY || "REPLACE_KEY"
+            }
+            mapboxOptions={mapboxOptions}
+            PinComponent={MapPin}
+            onDrag={onDrag}
+          />
+        </div>
+        <VerticalResults CardComponent={StandardCard} />
+        <Pagination />
+        <LocationBias />
+      </div>
+    </div>
   );
-};
-
-export default LocationPage;
+}
