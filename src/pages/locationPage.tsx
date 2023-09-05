@@ -91,9 +91,7 @@ const LocationPage = () => {
             </div>
             <div className=" w-3/5 h-screen">
               <MapboxMap
-                mapboxAccessToken={
-                  "pk.eyJ1Ijoic3VubnlrZWVydGhpIiwiYSI6ImNsNWh5ZGt3czAyejUzY3A3Y3pvZ2E0bTgifQ.TNHfh1HL0LwTzLxs2TOaBQ"
-                }
+                mapboxAccessToken={process.env.YEXT_PUBLIC_MAP_API_KEY || ""}
                 mapboxOptions={mapboxOptions}
                 PinComponent={MapPin}
                 onDrag={onDrag}
